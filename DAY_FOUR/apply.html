@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var o ={
+            name:'anby'
+        };
+        function fn(arr){
+            console.log(this);
+            console.log(arr);
+        };
+        //使fn中的this指向对象o
+        fn.apply(o);
+
+        //与call不同的是 apply的参数是数组
+        fn.apply(o,['pink']);
+
+        //apply的主要应用,
+        //利用apply借助于数学内置对象求最大值
+        var arr=[1,66,3,99,15];
+         var max=  Math.max.apply(null,arr);
+         console.log(max);
+        //重新指回Math，是对象Math调用了
+         var max1=  Math.max.apply(Math,arr);
+         console.log(max1);
+
+
+    </script>
+</body>
+</html>

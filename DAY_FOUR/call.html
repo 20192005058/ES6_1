@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this指向</title>
+</head>
+<body>
+    <script>
+        var o ={
+            name:'anby'
+        }
+        function fn(a,b){
+            console.log(this);
+            console.log(a+b);
+        }
+        fn.call();
+        //调用函数，call里面是要this指向的对象。
+        fn.call(o);
+        fn.call(o,1,2);
+
+        //call可以用来继承
+
+        function Father(uname,age,sex){
+            this.uname=uname;
+            this.age=age;
+            this.sex=sex;
+        }
+        function Son(uname,age,sex){
+            //调用Father，使Father里的this指向Son里的this
+            Father.call(this,uname,age,sex);
+        }
+        var ldh=new Son('刘德华',18,'男');
+        console.log(ldh);
+    </script>
+</body>
+</html>
