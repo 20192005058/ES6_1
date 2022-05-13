@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拷贝</title>
+</head>
+<body>
+    
+    <script>
+        //浅拷贝
+        var obj ={
+            name:'刘德华',
+            age:18,
+            msg:{
+                sex:'男'
+            },
+            sayHi:function(){
+                console.log(this.name + this.msg.sex);
+            }
+        };
+        var o={};
+        for(var k in obj){
+            o[k]=obj[k];
+        }
+        o.name='张学友';
+        console.log(o.name);
+        console.log(obj.name);
+        o.msg.sex='女';
+        console.log(o.msg.sex);
+        console.log(obj.msg.sex);
+        var oo={};
+        Object.assign(oo,obj);
+        console.log(oo);
+        obj.sayHi();
+        o.sayHi();
+        oo.sayHi();
+
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 怎么从外面访问fn中的变量？
+        function fn(){
+            var num=10;
+            console.log('num:'+num);
+        }
+        var a =fn;
+        //这里.num都是给fn添加属性，并没有访问其内部的num变量
+        a.num=11;
+        console.log(fn.num);
+        fn.num=12;  
+        fn();
+        console.log(fn);
+        console.log(fn.prototype);
+        console.log(fn.num);
+
+        //闭包可以从外面访问函数内部
+
+        function fun(){
+            var num=10;
+            function ffun(){
+               // num=12;
+                console.log('闭包中的num：'+num);
+            }
+            return ffun;
+            //另一种写法
+            return function (){
+                console.log('闭包中的num：'+num);
+            }
+        }
+        var f=fun();
+        f();
+        
+        //计算打车价格
+        //打车起步价13（3公里内），之后每多一公里增加5块钱
+        //用户输入公里数可以计算打车价格
+        //如果有拥堵情况，总价格多收取10块钱拥堵费
+
+        var money=  ( function(){
+            var total=0;
+            var start =13;
+            return {
+                //正常价格
+                price:function(n){
+                    if(n<=3)
+                    total=start;
+                    else
+                    total=(n-3)*5+start;
+                    return total;
+                },
+                //拥堵时价格
+                yd: function(n){
+                    return total+10;
+                }
+            }
+        })();
+
+        console.log('要付：'+money.price(5));
+        console.log('要付：'+money.yd(5));
+
+        console.log('要付：'+money.price(1));
+        console.log('要付：'+money.yd(1));
+    </script>
+</body>
+</html>

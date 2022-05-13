@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         var obj ={
+            name:'刘德华',
+            age:18,
+            msg:{
+                sex:'男'
+            },
+            arr:[1,2,3],
+            sing:function(){
+                console.log(this.name+'唱歌');
+                console.log(this)
+            }
+        };
+        function deepcopy(newobj,oldobj){
+            for(var k in oldobj){
+                //k--> 属性  oldobj[k]--> 属性值
+                var item = oldobj[k];
+                //函数不需要深拷贝，自动会分配不同地址，这就是为什么要原型
+                //数组
+                if(item instanceof Array){
+                    newobj[k]=[];
+                    deepcopy(newobj[k],item);
+                }
+                else if(item instanceof Object){
+                    newobj[k]={};
+                    deepcopy(newobj[k],item);
+                }
+                //属于简单的数据类型
+                else {
+                    newobj[k]=item;
+                }
+            }
+        }
+        var o={};
+        
+        deepcopy(o,obj);
+        o.arr=[11,22,33,55];
+        o.age=19;
+        console.log(o);
+        console.log(obj);
+
+        //对象的赋值是指向同一块地址，本质还是一个东西
+        //基础类型的赋值指向的不再是同一块地址
+        var a=1;
+        var b=a;
+        var c=b;
+        console.log(c);
+        a=2;
+        console.log(c);
+
+        var aa={
+            age:18
+        };
+        var bb=aa;
+        var cc=aa;
+        console.log(cc);
+        aa.age=22;
+        console.log(cc);
+    </script>
+</body>
+</html>

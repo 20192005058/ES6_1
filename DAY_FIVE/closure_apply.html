@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="nav">
+        <li>麻瓜</li>
+        <li>窝瓜</li>
+        <li>西瓜</li>
+        <li>南瓜</li>
+    </ul>
+    <script>
+        var lis = document.querySelector('.nav').querySelectorAll('li');
+        //for是同步， 这里onclick的function是异步
+        for(var i=0;i<lis.length;i++){
+            lis[i].index=i;
+            lis[i].onclick=function(){
+                //console.log(i);
+                //将编号设置为li的属性去获取编号
+                console.log(this.index);
+            }
+        }
+
+        //利用闭包得到索引号
+        for(var i=0;i<lis.length;i++){
+            //创建四个立即执行函数
+            //这里闭包会造成内存泄露
+            //i在一直等着点击事件才能被销毁
+            (function(){
+                lis[i].onclick=function(){
+                    console.log('闭包:'+i);
+                }
+            })(i);
+        }
+
+    </script>
+</body>
+</html>

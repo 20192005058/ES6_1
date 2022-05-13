@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝</title>
+</head>
+<body>
+    <script>
+        var obj ={
+            name:'刘德华',
+            age:18,
+            msg:{
+                sex:'男'
+            },
+            arr:[1,2,3],
+            sing:function(){
+                console.log(this.name+'唱歌');
+                console.log(this)
+            }
+        };
+        obj.sing();
+        var o={};
+        o=obj;
+        o.name='张学友';
+        o.sing();
+          obj.sing();
+
+          //obj为什么会改变？
+          console.log(obj.name);
+    </script>
+</body>
+</html>
