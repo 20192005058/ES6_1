@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //symbol是es6中新的原始数据类型，表示独一无二的值
+        //可以定义对象的私有属性
+        //symbol声明的变量，取值时要用[]，不能用.
+        
+        const name ='name';
+        const name1 ='name';
+        console.log(name===name1); //true
+
+        const sex =Symbol('男');
+        const sex1 =Symbol('男');
+        console.log(sex==sex1); //false
+        console.log(sex===sex1);    //false
+
+        let s=Symbol('刘德华');
+        console.log(s);
+        let obj={
+            [s]:'刘德华' //这里要用[]，不用[]会认为你是声明普通的属性，不是这个symbol
+        };
+        console.log(obj[s]);
+    </script>
+</body>
+</html>

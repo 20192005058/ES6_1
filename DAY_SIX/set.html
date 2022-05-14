@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let set =new Set();
+        console.log(set);
+        set.add('4');
+
+        //1.es6中 set的键和值被认为是相等的
+        //因此set不用foreach去遍历
+        set.forEach((val,key)=>{
+            console.log(val);
+            console.log(key);
+        })
+
+        //2.数组去重
+        let set2 =new Set([1,2,3,3,3,4]);
+        
+        let arr =[...set2];
+        console.log(arr);
+
+        //3.set中对象的引用无法被释放
+        let set3 =new Set();
+        let obj={};
+        set3.add(obj);
+        obj=null;
+        console.log(set3);
+
+
+        //4.Weakset
+        //1.不能传入非对象类型的参数
+        //2.不可迭代，没有foreach（），没有size属性
+    </script>
+</body>
+</html>

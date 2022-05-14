@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //迭代器函数,通过yield关键字将函数挂起
+        //为了改变执行流提供了可能，为一步编程提供了方案
+        //1.function 之后，函数名之前有一个*
+        //2.只能在函数内部使用yield表达式，将函数挂起
+
+        function* fun(){
+            console.log('开始');
+            yield 2;
+            console.log('接着');
+            yield 3;
+            console.log('然后');
+            yield 4;
+            console.log('没了');
+        }
+        //当调用这个迭代器函数时,会返回一个遍历器对象，就可以用next()了
+        //next()到挂起的位置为止
+        let fn =fun();
+        console.log(fn.next());
+        console.log(fn.next());
+        console.log(fn.next());
+        console.log(fn.next());
+        //总结: generator是分段执行的，yield语句时暂停执行，next是继续执行
+
+        function* add(){
+            console.log('start');
+            //第一次next 到yield为止，
+            let x= yield '2';
+            //x不是 yield的返回值，yield的返回值返回到下面的输出了
+            //yield的返回值随着第一次next返回了
+            //x是第二次next执行时next（）传入的参数的值
+            console.log('one'+x);
+            let y= yield '3';
+            console.log('two' +y);
+            return x+y;
+        }
+
+        const a =add();
+        console.log(a.next());
+        console.log(a.next(20));
+        console.log(a.next(30));
+
+        //使用场景：为不具备iterator接口对象提供遍历操作
+       //具有iterator原生接口的有：
+       //Array ,Map ,Set ,String ,TypedArray ,arguments对象 ,NodeList对象
+       //实现class 和Object的iterator接口关键在于
+       //实现[Symbol.iterator]函数 和 next 函数
+       let o={
+           id:1,
+           star(){
+            console.log("hello");
+           },
+           [Symbol.iterator](){
+
+           }
+       };
+       console.log(o[Symbol.iterator]);
+       o.star();
+
+       
+    </script>
+</body>
+</html>

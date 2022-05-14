@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声明</title>
+</head>
+<body>
+    <script>
+        //var有变量提升，会自动将var提升到最顶端
+        //let没有变量提升
+        console.log(a);
+        var a=2;
+
+        //let是块级作用域，var可以跨块，但不能块函数
+        //let不能重复声明，var可以重复声明
+        var a=3;
+        console.log(a);
+
+        // let const 存在暂时性死区，var不存在
+        //也就是let，const未声明变量之前，该变量都是不可用的
+        //因为var有变量提升，因此var的对象是先被创建出来的
+
+
+        //var定义的全局变量会挂载到window对象中
+        //const 和let不会
+        var name = 'Matt';
+        console.log(window.name);
+
+        //const可以声明一个对象，对象不能修改，但是对象的属性能修改
+        //因为const声明的是栈区里的内容不能修改，
+       // 基本数据类型的值直接在栈内存中存储，
+       //而引用数据类型在栈区保存的是对象在堆区的地址，
+       //修改对象的属性，不会修改对象在栈区的地址，
+       //如果重新给对象person赋值，则会报错。
+        const person={
+            name:'刘德华'
+        }
+        person.name='张学友';
+        console.log(person.name);
+        
+
+        //var 会污染全局变量 let不会污染全局变量
+        var arr=[];
+        for(var i=0;i<10;i++)
+        {
+            arr[i]=function(){
+                return i;
+            }
+        }
+        console.log(arr[5]());
+        console.log(window.RegExp);
+        let RegExp=20;
+        console.log(RegExp);
+        console.log(window.RegExp);
+
+        //定时器setTimeout
+        //当同步代码执行完毕后，开始执行异步的setTimeout代码
+        //执行setTimeout时需要从当前作用域内寻找一个变量 i，for循环执行完毕
+        //当前 i=5，执行setTimeout时输出为5，
+        //任务队列中的剩余4个setTimeout也依次执行，输出为5。
+        //变量 j 是用 let 声明的，当前的 j 只在本轮循环中有效，
+        //每次循环的 j 其实都是一个新的变量，
+        // 所以 setTimeout 定时器里面的 j 其实是不同的变量，
+         // 即最后输出0-4。
+        for (var i = 0; i < 5; ++i) {
+    setTimeout(() => console.log(i), 0)
+        }
+// 输出5、5、5、5、5
+
+for (let j = 0; j < 5; ++j) {
+    setTimeout(() => console.log(j), 0)
+    }
+// 输出0、1、2、3、4
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1.默认值
+        //es5写法 es5函数的默认值是在函数体内的
+        function add(a,b){
+            a=a || 10;
+            b= b|| 20;
+            return a+b;
+        }
+        console.log(add());
+
+        //es6写法
+        function add1(a=10,b=20){
+            console.log(arguments); //undefined 一样传到arguments里
+            return a+b;
+        }
+        console.log(add1());
+        console.log(add1(undefined,1));
+
+        //2. 剩余函数解决arguments问题 在es5中
+        //arguments是一个伪数组
+        //arguments是收到的实参副本，把所有收到的实参收集起来
+        //放在一个arguments对象里
+        function fn(obj){
+            console.log(arguments);
+            let result =Object.create(null);
+            for(let i=1;i< arguments.length;i++){
+                result[arguments[i]]=obj[arguments[i]];
+            }
+            return result;
+        }
+
+        let obj={
+            name:'刘德华',
+            age:18,
+            sex:'男'
+        };
+        let ldh=fn(obj,'sex','age');
+        console.log(ldh);
+
+        //es6中用剩余函数解决
+        function fun(obj,...arr){
+            let result =Object.create(null);
+            console.log('这是：'+arr[0]);
+            console.log('这是：'+arr[1]);
+            for(i=0;i<arr.length;i++){
+                result[arr[i]]=obj[arr[i]];
+            }
+            return result;
+        }
+        let zxy=fun(obj,'sex','age');
+        console.log(zxy);
+    </script>
+</body>
+</html>

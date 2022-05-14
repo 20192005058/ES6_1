@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扩展运算符和箭头函数</title>
+</head>
+<body>
+    <script>
+        //1.扩展运算符
+        //剩余运算符：把多个独立的参数合并到一个数组中
+        //扩展运算符：将一个数组分隔，并将各个项作为分离的参数传给函数
+        //es5中 去数组中的最大值
+        const arr=[10,20,50,100,90];
+        //apply 能将数组里的值分割
+        console.log(Math.max.apply(Math,arr));
+
+        //es6使用扩展运算符
+        console.log(Math.max(...arr));
+
+        //2.箭头函数 使用=>来定义function(){}
+        //function(){} 等价于()=>{}
+
+        //es5中
+        let add =function(a,b){
+            return a+b;
+        }
+        console.log(add(10,20));
+
+        //es6中 如只有一个参数，括号可以省略
+        //{}当里面只有一条语句时还可以省略
+        let add1 =(a,b)=>{
+            return a+b;
+        }
+        //参数只有一个，并且函数背部return有返回值时
+        //可以省略成以下
+        let add2 = val=>val+5;
+        
+        console.log(add1(10,20));
+        console.log(add2(5));
+
+
+        //3.高阶函数时：
+         function aa(b) {
+            return function(c){
+                return b + c;
+            }
+        }
+        console.log(aa(1)(2)) //3
+        // 等于
+        var a = b=>c=>b+c;//两个箭头以上的也叫做高阶函数
+        console.log(a(1)(2)) //3
+
+        //如果返回一个对象
+        //就必须加小括号，也就是返回一个表达式
+        
+        let getObj = id=>({id:id,name:'小马哥'});
+        let obj=getObj(1);
+        console.log(obj);
+
+
+        //箭头函数和普通函数区别
+        //箭头函数并不是一个对象，他是一个表达式语法糖
+   /*   1、箭头函数中没有this，函数内部的this指向父级且非箭头函数，而且不能改变this指向；
+        2、箭头函数没有super；
+        3、箭头函数没有arguments(这里要说明下，箭头函数里边的arguments指向外层非箭头函数的arguments)；
+        4、不能使用new；
+         5、没有原型；
+        6、不支持重复命名参数。
+*/      
+        //箭头函数中没有this
+        //内部的this通过查找作用域链来确定 往上查找
+        let PageHandle={
+            id:123,
+            // init作用域里面是PageHandle来调用的
+            //因此this指向PageHandle，
+            //箭头函数里面就没有作用域链了，找到上一级并且成为他的作用域链
+            //就相当于this在init作用域链上
+            init:function(){
+                document.addEventListener('click',(event)=>{
+                    this.doSomeThings(event.type);
+                },false)
+            },
+          doSomeThings:function(type){
+              console.log(`事件类型：${type}，当前id${this.id}`);
+          }
+        }
+      PageHandle.init();
+
+    </script>
+</body>
+</html>

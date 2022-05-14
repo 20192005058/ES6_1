@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //es6中
+        const name='刘德华',
+            age =20;
+        const Person={
+            name,//相当于name:name
+            age,
+            sayName(){
+                console.log(this.name);
+            }
+        }
+        Person.sayName();
+
+        let a,b,c;
+        [a,b,c]=[1,2,[1,2,3]];
+        console.log(a,b,c);
+        
+        //is()
+        //Object.is() 方法判断两个值是否为同一个值。
+        console.log(Object.is(+0, -0));
+        console.log(Object.is(-0, -0));
+        
+
+        //assign()
+        //Object.assign() 方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。
+            const target = { a: 1, b: 2 };//目标对象
+            const source = { b: 4, c: 5 };//源对象
+
+            const returnedTarget = Object.assign(target, source);
+
+            console.log(target);
+            // expected output: Object { a: 1, b: 4, c: 5 }
+
+            console.log(returnedTarget);
+            // expected output: Object { a: 1, b: 4, c: 5 }
+
+    </script>
+</body>
+</html>
